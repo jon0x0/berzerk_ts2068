@@ -38,3 +38,9 @@ header{justify-content:flex-start}
 #pad::before{content:"";position:absolute;inset:27.5%;border:2px solid #aaa8;border-radius:50%;background:#2228;pointer-events:none}
 @media(min-aspect-ratio:1/1){#pad{width:min(calc(100% - 8px),80dvh)}}
 @media(max-aspect-ratio:1/1){#stage{grid-template-rows:minmax(0,1fr) min(46vw,240px)}#pad{width:min(100%,calc(46vw - 8px),232px);margin-top:4px}}
+
+/* Keep all session controls and the touch switch reachable when touch is off. */
+#below-fire #coin{flex-basis:45%!important;white-space:normal}
+#touch-toggle{white-space:nowrap}
+.touch-off #pad,.touch-off #fire{display:none}
+@media(max-aspect-ratio:1/1){.touch-off #stage{grid-template-rows:minmax(0,1fr) 0;row-gap:0}.touch-off #actions{margin:0}}
