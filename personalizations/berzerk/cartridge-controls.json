@@ -1,0 +1,23 @@
+{
+  "title": "Berzerk",
+  "actions": [
+    {
+      "id": "coin",
+      "label": "Insert Coin",
+      "code": "KeyC",
+      "placement": "below-fire"
+    },
+    {
+      "id": "start",
+      "label": "Start",
+      "code": "Enter",
+      "placement": "below-fire"
+    },
+    {
+      "id": "start-two",
+      "label": "2 Players",
+      "code": "Digit2",
+      "placement": "below-fire"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="app.css">
+<title>TSRun</title>
+<style>
+:root {
+    --accent: #0BF;
+}
+header {
+    padding: 10px 14px 5px;
+}
+.media-info {
+    flex: 1 1 auto;
+}
+.media-row {
+    flex-wrap: nowrap;
+}
+.rom-load {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+#rom0-info,
+#rom1-info {
+    text-align: right;
+}
+#workspace {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--paper);
+}
+#screen-slot {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+#screen-slot:fullscreen {
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+}
+@media (max-width: 700px) {
+    .media-row {
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+<body>
+<header id="page-header" class="colbox">
+    <div class="rowbox">
+        <button id="reset">Reset</button>
+        <button id="nmi" title="Non-maskable interrupt">NMI</button>
+        <label class="switch" title="Onscreen keyboard (F1)"><input id="keyboard-toggle" type="checkbox">Keyboard</label>
+        <label class="switch" title="Onscreen player 1 joystick"><input id="touch-toggle" type="checkbox">Touch controls</label>
+        <label class="switch" title="CRT display filter"><input id="crt" type="checkbox" checked>CRT</label>
+        <label class="switch" title="Spread AY channels A/B/C across the stereo image; the hardware is mono"><input id="stereo" type="checkbox">Stereo</label>
+        <button id="fullscreen-toggle" title="Fullscreen (F11)">Fullscreen</button>
+        <div class="media-info"><span id="init-info">Initializing...</span> <span id="sound-info" title="Emulated frames per second (60.1 is real time), then audio an overrun discarded and audio an underrun filled with silence, over the last second"></span> <span id="startup-file-info"></span></div>
+        <a href="archive.html">Archive browser</a>
+        <a href="https://github.com/josef-jelinek/TSRun">GitHub repo</a>
+    </div>
+    <div class="rowbox media-row">
+        <button id="load-tape">Load Tape</button>
+        <input id="file-tape" type="file" accept=".tap,.tzx" style="display: none">
+        <label class="switch" title="Start selected tapes with the bundled TS2068 ROM loader"><input id="auto" type="checkbox" checked>Auto</label>
+        <label class="switch"><input id="turbo" type="checkbox" checked>Turbo</label>
+        <button id="play-tape" title="Start or resume tape playback" disabled>Play</button>
+        <div id="tape-info" class="media-info">No tape</div>
+        <div class="rom-load">
+            <div id="rom0-info" class="media-info">No HOME ROM file</div>
+            <button id="load-rom0" title="Set HOME ROM">Load ROM0</button>
+            <input id="file-rom0" type="file" accept=".rom, .bin" style="display: none">
+        </div>
+    </div>
+    <div class="rowbox media-row">
+        <button id="load-cart">Load Cart</button>
+        <input id="file-cart" type="file" accept=".dck" style="display: none">
+        <button id="eject-cart">Eject</button>
+        <div id="cart-info" class="media-info">No cartridge</div>
+        <div class="rom-load">
+            <div id="rom1-info" class="media-info">No EXROM file</div>
+            <button id="load-rom1" title="Set EXROM">Load ROM1</button>
+            <input id="file-rom1" type="file" accept=".rom, .bin" style="display: none">
+        </div>
+    </div>
+</header>
+<main id="workspace">
+    <div id="screen-slot">
+        <canvas id="screen" width="640" height="240"></canvas>
+    </div>
+    <div id="keyboard-split" style="display: none"></div>
+    <div id="keyboard" style="display: none">
+        <div class="keyboard-face"></div>
+    </div>
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>
