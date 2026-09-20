@@ -1,3 +1,10 @@
+// Keep old bookmarked/cached entry paths on the public root URL.
+const publicRoot=new URL('../../',import.meta.url);
+if(location.pathname===new URL('./',import.meta.url).pathname){
+  const base=document.createElement('base');base.href=location.href;
+  document.head.prepend(base);
+  history.replaceState(null,'',publicRoot.pathname+location.search+location.hash);
+}
 const frame=document.querySelector('#emulator');
 const api=()=>frame.contentWindow.berzerk;
 let ready=false,direction=255,firing=false;
