@@ -42,7 +42,7 @@ window.addEventListener('keyup',e=>{if(ready)api().key(e,false);});
 
 // Cartridge-owned touch switch; keyboard and physical gamepads remain active.
 const touchToggle=document.createElement('button');
-touchToggle.id='touch-toggle';touchToggle.textContent='D-pad: On';
+touchToggle.id='touch-toggle';touchToggle.innerHTML='Virtual<br>DPad';
 touchToggle.title='Show or hide the on-screen D-pad and Fire button';
 touchToggle.setAttribute('aria-label','On-screen touch controls');
 touchToggle.setAttribute('aria-pressed','true');
@@ -57,18 +57,20 @@ touchToggle.addEventListener('click',()=>{
   if(oldFire!==null&&fire.hasPointerCapture(oldFire))fire.releasePointerCapture(oldFire);
   if(ready)api().contacts(255);
   document.querySelector('main').classList.toggle('touch-off',!touchEnabled);
-  touchToggle.textContent=touchEnabled?'D-pad: On':'D-pad: Off';
   touchToggle.setAttribute('aria-pressed',String(touchEnabled));
 });
 
 const crtToggle=document.createElement('button');
-crtToggle.id='crt-toggle';crtToggle.textContent='CRT: Off';crtToggle.disabled=!ready;
+crtToggle.id='crt-toggle';crtToggle.textContent='CRT';crtToggle.disabled=!ready;
 crtToggle.title='Enable or disable CRT scanlines';
 crtToggle.setAttribute('aria-pressed','false');
 document.querySelector('header').append(crtToggle);
 let crtEnabled=false;
 crtToggle.addEventListener('click',()=>{
   crtEnabled=!crtEnabled;api().setCrt(crtEnabled);
-  crtToggle.textContent=crtEnabled?'CRT: On':'CRT: Off';
   crtToggle.setAttribute('aria-pressed',String(crtEnabled));
 });
+
+const fullscreenToggle=document.querySelector('#fullscreen');
+fullscreenToggle.setAttribute('aria-pressed',String(!!document.fullscreenElement));
+document.addEventListener('fullscreenchange',()=>fullscreenToggle.setAttribute('aria-pressed',String(!!document.fullscreenElement)));

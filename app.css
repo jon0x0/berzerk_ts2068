@@ -220,3 +220,6 @@ body.keyboard-splitting {
     }
     .touch-enabled .touch-fire { justify-self: end; }
 }
+
+/* Two-line touch label retains the original switch height. */
+.switch:has(> #touch-toggle){box-sizing:border-box;height:27.6px;padding:1.8px 12px;line-height:11px;text-align:center}

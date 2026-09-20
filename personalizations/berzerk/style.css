@@ -60,3 +60,9 @@ header strong,main:fullscreen header strong{display:block;grid-column:1;grid-row
 
 .brand{line-height:1.05}.brand span{display:block;font-size:12px;letter-spacing:.09em;margin-top:3px}
 @media(max-aspect-ratio:1/1){header{grid-template-rows:34px 34px 34px}}
+
+/* TSRun active switch convention: blue background and black text. */
+header button[aria-pressed="true"]{background:#0bf;color:#000}
+header #touch-toggle{font-size:12px;line-height:12px;padding:4px 10px;text-align:center}
+
+header #touch-toggle{height:34px;min-height:34px;max-height:34px}
