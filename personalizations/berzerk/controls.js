@@ -3,7 +3,7 @@ const api=()=>frame.contentWindow.berzerk;
 let ready=false,direction=255,firing=false;
 const send=()=>{if(ready)api().contacts(direction & (firing?0x6f:255));};
 const release=()=>{direction=255;firing=false;document.querySelector('#knob').style.transform='';if(ready)api().release();};
-const config=await (await fetch('cartridge-controls.json')).json();
+const config=await (await fetch(new URL('./cartridge-controls.json',import.meta.url))).json();
 for(const action of config.actions){
   const button=document.createElement('button');button.textContent=action.label;button.id=action.id;button.disabled=true;
   button.addEventListener('click',()=>api()?.press(action.code));
