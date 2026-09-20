@@ -23,7 +23,7 @@ window.addEventListener('message',event=>{
 });
 const pad=document.querySelector('#pad'),fire=document.querySelector('#fire');
 let padId=null,fireId=null;
-function move(event){const r=pad.getBoundingClientRect(),x=(event.clientX-r.left-r.width/2)/(r.width/2),y=(event.clientY-r.top-r.height/2)/(r.height/2);direction=Math.hypot(x,y)<.22?255:[0xf7,0xf5,0xfd,0xf9,0xfb,0xfa,0xfe,0xf6][(Math.round(Math.atan2(y,x)/(Math.PI/4))+8)%8];const length=Math.max(1,Math.hypot(x,y));document.querySelector('#knob').style.transform=`translate(${x/length*r.width*.24}px,${y/length*r.height*.24}px)`;send();}
+function move(event){const r=pad.getBoundingClientRect(),x=(event.clientX-r.left-r.width/2)/(r.width/2),y=(event.clientY-r.top-r.height/2)/(r.height/2);direction=Math.hypot(x,y)<(config.touchPad?.deadZone ?? .45)?255:[0xf7,0xf5,0xfd,0xf9,0xfb,0xfa,0xfe,0xf6][(Math.round(Math.atan2(y,x)/(Math.PI/4))+8)%8];const length=Math.max(1,Math.hypot(x,y));document.querySelector('#knob').style.transform=`translate(${x/length*r.width*.24}px,${y/length*r.height*.24}px)`;send();}
 pad.addEventListener('pointerdown',e=>{if(!ready||padId!==null)return;e.preventDefault();padId=e.pointerId;pad.setPointerCapture(padId);move(e);});
 pad.addEventListener('pointermove',e=>{if(e.pointerId===padId)move(e);});
 fire.addEventListener('pointerdown',e=>{if(!ready||fireId!==null)return;e.preventDefault();fireId=e.pointerId;fire.setPointerCapture(fireId);firing=true;send();});

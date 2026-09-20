@@ -19,5 +19,8 @@
       "code": "Digit2",
       "placement": "below-fire"
     }
-  ]
+  ],
+  "touchPad": {
+    "deadZone": 0.45
+  }
 }
