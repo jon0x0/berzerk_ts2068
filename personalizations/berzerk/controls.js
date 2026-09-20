@@ -46,7 +46,7 @@ touchToggle.id='touch-toggle';touchToggle.textContent='D-pad: On';
 touchToggle.title='Show or hide the on-screen D-pad and Fire button';
 touchToggle.setAttribute('aria-label','On-screen touch controls');
 touchToggle.setAttribute('aria-pressed','true');
-document.querySelector('#coin').after(touchToggle);
+document.querySelector('#fullscreen').after(touchToggle);
 touchToggle.addEventListener('click',()=>{
   touchEnabled=!touchEnabled;
   // Drop touch contacts only; do not interrupt held physical keyboard keys.

@@ -44,3 +44,8 @@ header{justify-content:flex-start}
 #touch-toggle{white-space:nowrap}
 .touch-off #pad,.touch-off #fire{display:none}
 @media(max-aspect-ratio:1/1){.touch-off #stage{grid-template-rows:minmax(0,1fr) 0;row-gap:0}.touch-off #actions{margin:0}}
+
+/* Upper-left display controls; upper-right session controls. */
+header #touch-toggle{pointer-events:auto;min-height:34px;font-size:13px;padding:8px 12px}
+#below-fire #coin{flex-basis:100%!important}
+@media(max-aspect-ratio:1/1){header{flex-wrap:wrap;align-content:flex-start;width:calc(100% - clamp(145px,15vw,180px) - 16px);gap:8px}header strong{flex-basis:100%}header #touch-toggle{margin:0}}
