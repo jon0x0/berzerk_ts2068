@@ -62,11 +62,11 @@ touchToggle.addEventListener('click',()=>{
 });
 
 const crtToggle=document.createElement('button');
-crtToggle.id='crt-toggle';crtToggle.textContent='CRT: On';crtToggle.disabled=!ready;
+crtToggle.id='crt-toggle';crtToggle.textContent='CRT: Off';crtToggle.disabled=!ready;
 crtToggle.title='Enable or disable CRT scanlines';
-crtToggle.setAttribute('aria-pressed','true');
+crtToggle.setAttribute('aria-pressed','false');
 document.querySelector('header').append(crtToggle);
-let crtEnabled=true;
+let crtEnabled=false;
 crtToggle.addEventListener('click',()=>{
   crtEnabled=!crtEnabled;api().setCrt(crtEnabled);
   crtToggle.textContent=crtEnabled?'CRT: On':'CRT: Off';
