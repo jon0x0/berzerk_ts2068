@@ -49,3 +49,11 @@ header{justify-content:flex-start}
 header #touch-toggle{pointer-events:auto;min-height:34px;font-size:13px;padding:8px 12px}
 #below-fire #coin{flex-basis:100%!important}
 @media(max-aspect-ratio:1/1){header{flex-wrap:wrap;align-content:flex-start;width:calc(100% - clamp(145px,15vw,180px) - 16px);gap:8px}header strong{flex-basis:100%}header #touch-toggle{margin:0}}
+
+/* Keep the name visible in fullscreen; CRT sits below the display buttons. */
+header{display:grid;grid-template-columns:auto auto auto;grid-template-rows:34px 34px;justify-content:start;align-content:start;gap:8px 12px;height:auto}
+header strong,main:fullscreen header strong{display:block;grid-column:1;grid-row:1;align-self:center}
+#fullscreen{grid-column:2;grid-row:1;margin-left:0}
+#touch-toggle{grid-column:3;grid-row:1}
+#crt-toggle{grid-column:2;grid-row:2;pointer-events:auto;min-height:34px;font-size:13px;padding:8px 12px}
+@media(max-aspect-ratio:1/1){header{height:108px;grid-template-columns:auto auto;grid-template-rows:24px 34px 34px;gap:4px 8px}header strong,main:fullscreen header strong{grid-column:1/3;grid-row:1;padding:0}#fullscreen{grid-column:1;grid-row:2}#touch-toggle{grid-column:2;grid-row:2}#crt-toggle{grid-column:1;grid-row:3}}

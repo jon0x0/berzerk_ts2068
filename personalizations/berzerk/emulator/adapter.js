@@ -28,7 +28,7 @@ async function boot(){
   let gfx=null;
   await new Promise((resolve,reject)=>video.initScreen(canvas,{vert,frag},(err,value)=>{
     if(err||!value){reject(new Error(err||'WebGL2 unavailable'));notify('berzerk-error',err);return;}
-    gfx=value;video.setCrt(gfx,false);resolve();
+    gfx=value;video.setCrt(gfx,true);resolve();
   }));
   const sfx=await new Promise((resolve,reject)=>sound.initSound(1000/frameMs,(err,value)=>{
     if(err||!value)reject(new Error(err||'Web Audio unavailable'));else resolve(value);
@@ -55,6 +55,7 @@ async function boot(){
     video.drawScreen(gfx,machine.pixels);
   }
   window.berzerk={
+    setCrt(on){video.setCrt(gfx,on);},
     key(event,down){this.start();(down?keys.handleKeyDown:keys.handleKeyUp)(kbd,event);},
     contacts(value){touch=value;this.start();},
     release(){touch=255;keys.handleBlur(kbd);},
