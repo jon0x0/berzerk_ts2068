@@ -33,6 +33,8 @@ async function boot(){
   const sfx=await new Promise((resolve,reject)=>sound.initSound(1000/frameMs,(err,value)=>{
     if(err||!value)reject(new Error(err||'Web Audio unavailable'));else resolve(value);
   }));
+  const output=sfx.context.createGain();
+  sfx.node.disconnect();sfx.node.connect(output);output.connect(sfx.context.destination);
   cpu.setSoundRate(machine,sfx.context.sampleRate);cpu.enableSound(machine,true);sound.setSoundStereo(sfx,false);
   let last=0,carry=frameMs,started=false,touch=255;
   function step(){
@@ -55,6 +57,7 @@ async function boot(){
     video.drawScreen(gfx,machine.pixels);
   }
   window.berzerk={
+    setSound(on){output.gain.value=on?1:0;this.start();},
     setCrt(on){video.setCrt(gfx,on);},
     key(event,down){this.start();(down?keys.handleKeyDown:keys.handleKeyUp)(kbd,event);},
     contacts(value){touch=value;this.start();},

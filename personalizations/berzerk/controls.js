@@ -74,3 +74,16 @@ crtToggle.addEventListener('click',()=>{
 const fullscreenToggle=document.querySelector('#fullscreen');
 fullscreenToggle.setAttribute('aria-pressed',String(!!document.fullscreenElement));
 document.addEventListener('fullscreenchange',()=>fullscreenToggle.setAttribute('aria-pressed',String(!!document.fullscreenElement)));
+
+// Mute only the output; keep emulation and the audio queue running normally.
+const soundToggle=document.createElement('button');
+soundToggle.id='sound-toggle';soundToggle.textContent='Sound On';soundToggle.disabled=!ready;
+soundToggle.title='Turn game sound on or off';
+soundToggle.setAttribute('aria-pressed','true');
+document.querySelector('header').append(soundToggle);
+let soundEnabled=true;
+soundToggle.addEventListener('click',()=>{
+  soundEnabled=!soundEnabled;api().setSound(soundEnabled);
+  soundToggle.textContent=soundEnabled?'Sound On':'Sound Off';
+  soundToggle.setAttribute('aria-pressed',String(soundEnabled));
+});
