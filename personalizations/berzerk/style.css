@@ -86,3 +86,7 @@ main{--help-height:70px}
 }
 
 @media(max-width:360px) and (max-aspect-ratio:1/1){main{--help-height:124px}header{column-gap:4px}header button{padding-left:7px!important;padding-right:7px!important}#below-fire{width:140px}}
+
+/* Reclaim the instruction row for fullscreen gameplay. */
+main:fullscreen{--help-height:0px;overflow:hidden}
+main:fullscreen #controls-help,main:fullscreen #status{display:none}
